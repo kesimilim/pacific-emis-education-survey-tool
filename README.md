@@ -1,16 +1,98 @@
-# Pacific Education Survey Tool
+# pacific-emis-education-survey-tool
 
-This README file explains how to build and run android application
+Pacific EMIS Education Survey Tool is the android app used for survey data collection integrated with the Pacific EMIS
 
-### Steps
+# Modules description
 
-  - Download and install [Android Studio]
-  - Launch and select **Open an existing Android Studio project**
-  - Select project folder and press **Open**
-  - If IDE suggests to install some SDKs, install it
-  - Wait until all initialization processes finished
-  - Run app on Android emulator or on real device by pressing **Play** button on right-top panel, or by pressing cmd+r/cmd+d shortcuts
+App is splitted to several so-called feature-modules. They are connected in `app:Injection` class.
 
+Short explanation of currently existing modules:
 
+## Whole app:
 
-   [Android Studio]: <https://developer.android.com/studio>
+### app
+
+- injection configuration
+- glide configuration
+- screens which not vary by EMIS and survey types
+
+### core
+
+- shared interfaces and classes
+- base classes
+- shared views
+- shared logic
+
+## Survey feature:
+
+### survey_core
+
+- base classes for survey feature
+- shared UI
+- base UI classes
+
+### survey
+
+- Survey activity
+- SurveyType related DI presenter provider
+
+`SurveyType`-related implementations:
+
+### accreditation_core (School Accreditation)
+
+- SurveyInteractor implementation
+- data sources
+
+### accreditation (School Accreditation)
+
+- UI
+- Navigator
+
+### wash_core (WASH)
+
+- SurveyInteractor implementation
+- data sources
+
+### wash (WASH)
+
+- UI
+- Navigator
+
+### data_source_injector
+
+- data source provider DI
+
+## Report feature:
+
+### report_core
+
+- base interactor logic
+- report entities
+- base and shared UI
+
+### report
+
+- EMIS-dependent DI
+- UI
+
+### fsm_report (FedEMIS)
+
+- interactor implementation
+- additional entities and logic
+
+### rmi_report (MIEMIS)
+
+- interactor implementation
+- additional entities and logic
+
+### remote_settings
+
+- `RemoteSettings` implementation based on Firebase Remote Config
+
+### remote_storage
+
+- everything related to Google Auth and Google Drive
+
+### offline_sync
+
+- everything related to Bluetooth local syncronization
